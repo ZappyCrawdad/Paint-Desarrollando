@@ -10,6 +10,7 @@ package DibujoApp;
 
 import static java.awt.Color.green;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
@@ -29,6 +30,17 @@ public class Ventana extends JFrame {
         this.setLocationRelativeTo(null);
         iniciar();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
+        addMouseMotionListener(new MouseMotionAdapter() {
+            
+            @Override
+            public void mouseDragged(MouseEvent evt) {
+                System.out.println("arastrando");
+                p.GuardarPuntos(evt.getX(), evt.getY());
+                Dibujar();
+            }
+        });
+        
     }
 
     private void iniciar() {
@@ -48,13 +60,6 @@ public class Ventana extends JFrame {
         panel.add(boton1);
     }
 
-    public void mouseDragged(MouseEvent evt) {
-        
-        System.out.println("arastrando");
-        p.GuardarPuntos(evt.getX(), evt.getY());
-        Dibujar();
-    }
-    
     public void Dibujar(){
         
         for(int i = 0; i < p.listax().size(); i++){
