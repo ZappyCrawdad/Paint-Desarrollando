@@ -8,7 +8,9 @@
  */
 package DibujoApp;
 
-import static java.awt.Color.green;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.JButton;
@@ -20,7 +22,7 @@ public class Ventana extends JFrame {
 
     Points p = null;
     JPanel panelm;
-    JButton boton1;
+    JButton btnPincel;
 
     public Ventana() {
         p = new Points();
@@ -35,8 +37,8 @@ public class Ventana extends JFrame {
             
             @Override
             public void mouseDragged(MouseEvent evt) {
-                System.out.println("arastrando");
                 p.GuardarPuntos(evt.getX(), evt.getY());
+                System.out.println(evt.getX() + " " + evt.getY());
                 Dibujar();
             }
         });
@@ -51,21 +53,26 @@ public class Ventana extends JFrame {
 
         panelm = new JPanel();
         panelm.setBounds(0, 0, 700, 500);
-        panelm.setBackground(green);
+        panelm.setBackground(Color.WHITE);
         panel.setLayout(null);
         panel.add(panelm);
 
-        boton1 = new JButton("Pincel");
-        boton1.setBounds(710, 5, 70, 40);
-        panel.add(boton1);
+        btnPincel = new JButton("Pincel");
+        btnPincel.setBounds(710, 5, 70, 40);
+        panel.add(btnPincel);
     }
 
     public void Dibujar(){
+        Graphics2D g2d = (Graphics2D) panelm.getGraphics();
+        int size = 20;
+        
+        g2d.setColor(Color.BLACK);
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
         
         for(int i = 0; i < p.listax().size(); i++){
             int x = p.listax().get(i);
             int y = p.listay().get(i);
-            panelm.getGraphics().fillOval(x, y, 20, 20);
+            g2d.fillOval(x, y-size*2, size, size);
         }
     }
 }
