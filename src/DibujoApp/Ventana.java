@@ -26,7 +26,6 @@ public class Ventana extends JFrame {
     Points p = null;
     JPanel panelm;
     JButton btnPincel;
-    
     JMenuBar barra;
     JMenu archivo;
     JMenuItem guardar;
@@ -46,12 +45,10 @@ public class Ventana extends JFrame {
        guardar = new JMenuItem("Guardar");
        abrir = new JMenuItem("Abrir");
        add(barra);
-       
        barra.add(archivo);
        archivo.add(guardar);
        archivo.add(abrir);
        setJMenuBar(barra);//Para asociar al JFrame
-        
         addMouseMotionListener(new MouseMotionAdapter() {
             
             @Override
