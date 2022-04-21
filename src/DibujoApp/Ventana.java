@@ -37,7 +37,7 @@ public class Ventana extends JFrame {
         setTitle("Draw");
         this.setSize(800, 500);
         this.setLocationRelativeTo(null);
-        iniciar();
+        
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
        barra = new JMenuBar();
@@ -49,6 +49,7 @@ public class Ventana extends JFrame {
        archivo.add(guardar);
        archivo.add(abrir);
        setJMenuBar(barra);//Para asociar al JFrame
+       iniciar();
         addMouseMotionListener(new MouseMotionAdapter() {
             
             @Override
