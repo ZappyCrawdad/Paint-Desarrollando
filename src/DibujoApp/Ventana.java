@@ -45,12 +45,10 @@ public class Ventana extends JFrame {
        guardar = new JMenuItem("Guardar");
        abrir = new JMenuItem("Abrir");
        add(barra);
-
        barra.add(archivo);
        archivo.add(guardar);
        archivo.add(abrir);
        setJMenuBar(barra);//Para asociar al JFrame
-
         addMouseMotionListener(new MouseMotionAdapter() {
             
             @Override
