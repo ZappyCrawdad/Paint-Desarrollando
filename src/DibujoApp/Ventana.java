@@ -16,6 +16,9 @@ import java.awt.event.MouseMotionAdapter;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 public class Ventana extends JFrame {
@@ -23,6 +26,10 @@ public class Ventana extends JFrame {
     Points p = null;
     JPanel panelm;
     JButton btnPincel;
+    JMenuBar barra;
+    JMenu archivo;
+    JMenuItem guardar;
+    JMenuItem abrir;
 
     public Ventana() {
         p = new Points();
@@ -33,6 +40,17 @@ public class Ventana extends JFrame {
         iniciar();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
+       barra = new JMenuBar();
+       archivo = new JMenu("Archivo");
+       guardar = new JMenuItem("Guardar");
+       abrir = new JMenuItem("Abrir");
+       add(barra);
+
+       barra.add(archivo);
+       archivo.add(guardar);
+       archivo.add(abrir);
+       setJMenuBar(barra);//Para asociar al JFrame
+
         addMouseMotionListener(new MouseMotionAdapter() {
             
             @Override
