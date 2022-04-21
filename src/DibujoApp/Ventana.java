@@ -8,7 +8,7 @@
  */
 package DibujoApp;
 
-import java.awt.Color;
+import static java.awt.Color.*;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
@@ -72,7 +72,7 @@ public class Ventana extends JFrame {
 
         panelm = new JPanel();
         panelm.setBounds(0, 0, 700, 500);
-        panelm.setBackground(Color.WHITE);
+        panelm.setBackground(WHITE);
         panel.setLayout(null);
         panel.add(panelm);
 
@@ -85,7 +85,7 @@ public class Ventana extends JFrame {
         Graphics2D g2d = (Graphics2D) panelm.getGraphics();
         int size = 20;
         
-        g2d.setColor(Color.BLACK);
+        g2d.setColor(BLACK);
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
         
         for(int i = 0; i < p.listax().size(); i++){
