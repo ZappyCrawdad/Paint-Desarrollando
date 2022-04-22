@@ -11,9 +11,14 @@ package DibujoApp;
 import static java.awt.Color.*;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.io.File;
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JMenu;
@@ -27,9 +32,9 @@ public class Ventana extends JFrame {
     JPanel panelm;
     JButton btnPincel;
     JMenuBar barra;
-    JMenu archivo;
-    JMenuItem guardar;
-    JMenuItem abrir;
+    JMenu archivo, escolor;
+    JMenuItem nuevo, guardar, abrir, chcolor;
+    JColorChooser colorChooser = new JColorChooser();
 
     public Ventana() {
         p = new Points();
@@ -41,11 +46,16 @@ public class Ventana extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
        barra = new JMenuBar();
+       nuevo = new JMenu("Nuevo");
+       escolor = new JMenu("Cambiar Color");
+       chcolor = new JMenuItem("Color");
        archivo = new JMenu("Archivo");
        guardar = new JMenuItem("Guardar");
        abrir = new JMenuItem("Abrir");
        add(barra);
        barra.add(archivo);
+       barra.add(escolor);
+       escolor.add(chcolor);
        archivo.add(guardar);
        archivo.add(abrir);
        setJMenuBar(barra);//Para asociar al JFrame
@@ -91,5 +101,36 @@ public class Ventana extends JFrame {
             int y = p.listay().get(i);
             g2d.fillOval(x, y-size*2, size, size);
         }
+    }
+    ActionListener oyenteDeAccion = new ActionListener(){
+    
+    @Override
+    public void actionPerformed(ActionEvent e){
+        
+        if(e.getSource()==nuevo){
+            
+        }
+        
+        if(e.getSource()==abrir){
+            
+        }
+        
+        if(e.getSource()==guardar){
+            System.out.println("Guardando");
+            
+        File archivoSeleccionado;
+        JFileChooser seleccionarArchivo;
+        seleccionarArchivo = new JFileChooser();
+        seleccionarArchivo.showOpenDialog(null);
+        archivoSeleccionado = seleccionarArchivo.getSelectedFile();
+        System.out.println("El archivo seleccionado es: " + archivoSeleccionado);
+        System.out.println("Path actual: " + seleccionarArchivo.getCurrentDirectory());
+        }
+    }
+    };
+    
+    public void guardar(){
+        
+            
     }
 }
