@@ -69,7 +69,7 @@ public class Ventana extends JFrame {
                 Dibujar();
             }
         });
-        
+        añadirListeners();
     }
 
     private void iniciar() {
@@ -108,29 +108,35 @@ public class Ventana extends JFrame {
     public void actionPerformed(ActionEvent e){
         
         if(e.getSource()==nuevo){
-            
+            System.out.println("Nuevo");
         }
         
         if(e.getSource()==abrir){
-            
+            System.out.println("Abriendo");
+            File archivoSeleccionado;
+            JFileChooser seleccionarArchivo;
+            seleccionarArchivo = new JFileChooser();
+            seleccionarArchivo.showOpenDialog(null);
+            archivoSeleccionado = seleccionarArchivo.getSelectedFile();
+            System.out.println("El archivo seleccionado es: " + archivoSeleccionado);
+            System.out.println("Path actual: " + seleccionarArchivo.getCurrentDirectory());
         }
         
         if(e.getSource()==guardar){
-            System.out.println("Guardando");
-            
-        File archivoSeleccionado;
-        JFileChooser seleccionarArchivo;
-        seleccionarArchivo = new JFileChooser();
-        seleccionarArchivo.showOpenDialog(null);
-        archivoSeleccionado = seleccionarArchivo.getSelectedFile();
-        System.out.println("El archivo seleccionado es: " + archivoSeleccionado);
-        System.out.println("Path actual: " + seleccionarArchivo.getCurrentDirectory());
+            System.out.println("Guardando");  
         }
+        
     }
     };
     
     public void guardar(){
         
             
+    }
+    
+    private void añadirListeners(){
+        nuevo.addActionListener(oyenteDeAccion);
+        abrir.addActionListener(oyenteDeAccion);
+        guardar.addActionListener(oyenteDeAccion);
     }
 }
