@@ -8,6 +8,7 @@
  */
 package DibujoApp;
 
+import java.awt.Color;
 import static java.awt.Color.*;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -35,7 +36,14 @@ public class Ventana extends JFrame {
     JMenu archivo, escolor;
     JMenuItem nuevo, guardar, abrir, chcolor;
     JColorChooser colorChooser = new JColorChooser();
-
+    
+    // El color del pincel, por defecto se inicializa en negro
+    Color color = BLACK;
+    
+    // La variable bandera, sirve para no redibujar puntos del arreglo en el
+    // método Dibujar(), piense en ella como unas 'migas de pan'.
+    int bandera = 0;
+        
     public Ventana() {
         p = new Points();
 
@@ -65,8 +73,9 @@ public class Ventana extends JFrame {
             @Override
             public void mouseDragged(MouseEvent evt) {
                 p.GuardarPuntos(evt.getX(), evt.getY());
+                p.GuardarColor(color);
                 System.out.println(evt.getX() + " " + evt.getY());
-                Dibujar();
+                Dibujar(color);
             }
         });
         añadirListeners();
@@ -89,17 +98,22 @@ public class Ventana extends JFrame {
         panel.add(btnPincel);
     }
 
-    public void Dibujar(){
+    public void Dibujar(Color color){
         Graphics2D g2d = (Graphics2D) panelm.getGraphics();
         int size = 20;
-        
-        g2d.setColor(BLACK);
+        g2d.setColor(color);
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
         
-        for(int i = 0; i < p.listax().size(); i++){
+        // El ciclo de dibujado empieza donde se quedó, en lugar de empezar
+        // siempre desde cero.
+        
+        for(int i = bandera; i < p.listax().size(); i++){
             int x = p.listax().get(i);
             int y = p.listay().get(i);
             g2d.fillOval(x, y-size*2, size, size);
+            
+            // Se aumenta el valor de la variable bandera
+            bandera++;
         }
     }
     ActionListener oyenteDeAccion = new ActionListener(){
@@ -126,6 +140,10 @@ public class Ventana extends JFrame {
             System.out.println("Guardando");  
         }
         
+        if(e.getSource() == chcolor){
+            System.out.println("Cambiar color");
+            color = JColorChooser.showDialog(null, "Elige un color", Color.RED);
+        }
     }
     };
     
@@ -138,5 +156,7 @@ public class Ventana extends JFrame {
         nuevo.addActionListener(oyenteDeAccion);
         abrir.addActionListener(oyenteDeAccion);
         guardar.addActionListener(oyenteDeAccion);
+        chcolor.addActionListener(oyenteDeAccion);
     }
+
 }
